@@ -54,6 +54,47 @@ function buildSVG() {
     </svg>
   `;
 }
+function trapKeysInsideOverlay(shadowRoot) {
+  // Capture phase so we intercept before the page (YouTube shortcuts etc.)
+  shadowRoot.addEventListener(
+    "keydown",
+    (e) => {
+      const t = e.target;
+
+      const isTypingField =
+        t &&
+        (t.tagName === "INPUT" ||
+          t.tagName === "TEXTAREA" ||
+          t.isContentEditable === true);
+
+      // Only trap when user is typing in our fields
+      if (!isTypingField) return;
+
+      // Stop page-level shortcuts (YouTube: space, k, c, j, l, etc.)
+      e.stopPropagation();
+    },
+    true // capture
+  );
+
+  // Some sites listen on keyup too
+  shadowRoot.addEventListener(
+    "keyup",
+    (e) => {
+      const t = e.target;
+
+      const isTypingField =
+        t &&
+        (t.tagName === "INPUT" ||
+          t.tagName === "TEXTAREA" ||
+          t.isContentEditable === true);
+
+      if (!isTypingField) return;
+      e.stopPropagation();
+    },
+    true
+  );
+}
+
 
 function setPosition(position) {
   if (!els) return;
@@ -388,6 +429,8 @@ async function mount() {
   host.style.height = "0";
 
   shadow = host.attachShadow({ mode: "open" });
+  trapKeysInsideOverlay(shadow);
+
 
   // Load CSS via <link> (reliable)
   const link = document.createElement("link");
