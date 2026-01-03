@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Trenches 2026</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="header">
+      <div class="title">The Trenches 2026</div>
+      <div class="sub">Settings</div>
+    </div>
+
+    <div class="card">
+      <div class="row">
+        <div class="rowText">
+          <div class="label">Always On Display</div>
+          <div class="hint">Show the bubble on all sites</div>
+        </div>
+
+        <label class="switch">
+          <input id="aodToggle" type="checkbox" />
+          <span class="track"></span>
+          <span class="thumb"></span>
+          <span class="on">ON</span>
+          <span class="off">OFF</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="sectionTitle">New Tab Position</div>
+
+      <div class="segmented" role="radiogroup" aria-label="New Tab Position">
+        <button class="segBtn" data-pos="top-right" type="button">Top Right</button>
+        <button class="segBtn" data-pos="bottom-right" type="button">Bottom Right</button>
+        <button class="segBtn" data-pos="bottom-left" type="button">Bottom Left</button>
+      </div>
+
+      <div class="footnote">
+        Tip: On websites, you can drag the bubble anywhere.
+      </div>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+
+</html>
